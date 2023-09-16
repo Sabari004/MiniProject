@@ -7,16 +7,17 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class UserPayrollSystem {
-	Database db;
+	public Database db;
 
-    private Connection connection;
-    private Scanner scanner;
-
+    public Connection connection;
+    public  Scanner scanner;
+    Statement cal;
     public UserPayrollSystem() {
     	db=new Database();
     	db.setUrl("jdbc:mysql://localhost:3306/emp");
     	db.setPassword("727721euit131");
     	db.setUser("root");
+    	cal=new Statement();
         try {
             connection = DriverManager.getConnection(db.getUrl(), db.getUser(), db.getPassword());
             scanner = new Scanner(System.in);
@@ -52,7 +53,6 @@ public class UserPayrollSystem {
     }
 
     public void userDashboard(int id) {
-    	Display dp=new Display();
         while (true) {
             System.out.println("\nUser Dashboard");
             System.out.println("1. Edit Profile");
@@ -79,10 +79,10 @@ public class UserPayrollSystem {
                 	break;
                 case 5:
 
-                    System.out.println(dp.print1("Logged out from User account."));
+                    System.out.println("Logged out from User account.");
                     return;
                 default:
-                	 System.out.println(dp.print1(" choice. Please try again.\n", 1));
+                	 System.out.println("Invalid choice. Please try again.\n");
             }
         }
     }
@@ -161,26 +161,8 @@ public class UserPayrollSystem {
             System.out.println("Employee with ID " + empId + " not found.");
             return;
         }
-
-        String query = "SELECT * FROM salary WHERE empId = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, empId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            System.out.println("\n=== Earnings Statement ===");
-            while (resultSet.next()) {
-                double amount = resultSet.getDouble("amount");
-                String method = resultSet.getString("method");
-                String date = resultSet.getString("date");
-
-                System.out.println("Amount: $" + amount);
-                System.out.println("Payment Method: " + method);
-                System.out.println("Date: " + date);
-                System.out.println("------------------------");
-            }
-            System.out.println("=========================");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        cal.Calculate(id,connection,1);
+       
     }
     public void viewAttendanceForEmployee(int id) {
         int empId = id;
@@ -209,20 +191,8 @@ public class UserPayrollSystem {
             System.out.println("Employee with ID " + empId + " not found.");
             return;
         }
-
-        String query = "SELECT SUM(amount) AS totalEarnings FROM salary WHERE empId = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, empId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                double totalEarnings = resultSet.getDouble("totalEarnings");
-                System.out.println("Total Earnings: $" + totalEarnings);
-            } else {
-                System.out.println("No earnings found for the employee.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        
+        cal.Calculate(id,connection);
     }
 
     public static void main(String[] args) {

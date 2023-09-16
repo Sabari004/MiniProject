@@ -12,9 +12,15 @@ public class Main {
 	    UserPayrollSystem userPayrollSystem = new UserPayrollSystem();
 	    AdminPayrollSystem adminPayrollSystem = new AdminPayrollSystem();
 
-	    Display dp=new Display();
 	    Scanner scanner = new Scanner(System.in);
 	    while (true) {
+	    	System.out.println(".__                          ________                            ._. \r\n"
+	    			+ "|  |__    ____  ___.__.     /  _____/  __ __  ___.__.  ______    | | \r\n"
+	    			+ "|  |  \\ _/ __ \\<   |  |    /   \\  ___ |  |  \\<   |  | /  ___/    | | \r\n"
+	    			+ "|   Y  \\\\  ___/ \\___  |    \\    \\_\\  \\|  |  / \\___  | \\___ \\      \\| \r\n"
+	    			+ "|___|  / \\___  >/ ____|     \\______  /|____/  / ____|/____  >     __ \r\n"
+	    			+ "     \\/      \\/ \\/                 \\/         \\/          \\/      \\/ \r\n"
+	    			+ "                                                                     ");
 	        System.out.println("\nSelect Role:");
 	        System.out.println("1. Admin");
 	        System.out.println("2. User");
@@ -34,11 +40,18 @@ public class Main {
 //	                userPayrollSystem.userDashboard();
 	                break;
 	            case 3:
+	            	System.out.println("  __   .__                      __                ._. \r\n"
+	            			+ "_/  |_ |  |__  _____     ____  |  | __  ______    | | \r\n"
+	            			+ "\\   __\\|  |  \\ \\__  \\   /    \\ |  |/ / /  ___/    | | \r\n"
+	            			+ " |  |  |   Y  \\ / __ \\_|   |  \\|    <  \\___ \\      \\| \r\n"
+	            			+ " |__|  |___|  /(____  /|___|  /|__|_ \\/____  >     __ \r\n"
+	            			+ "            \\/      \\/      \\/      \\/     \\/      \\/ \r\n"
+	            			+ "                                                      ");
 	                System.out.println("Exiting the program.");
 	                scanner.close();
 	                System.exit(0);
 	            default:
-	            	 System.out.println(dp.print1(" choice. Please try again.\n", 1));
+	            	 System.out.println("Invalid choice. Please try again.\n");
 	        }
 	    }
 	}

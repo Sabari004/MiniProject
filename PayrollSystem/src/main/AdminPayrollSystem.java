@@ -109,7 +109,7 @@ public class AdminPayrollSystem {
     }
 
     public void adminDashboard() {
-    	Display dp=new Display();
+    	Statement dp=new Statement();
         while (true) {
             System.out.println("\nAdmin Dashboard");
             System.out.println("1. Add Employee");
@@ -144,11 +144,11 @@ public class AdminPayrollSystem {
                 	break;
                 case 7:
                 	
-                    System.out.println(dp.print1("Logged out from admin account."));
+                    System.out.println("Logged out from admin account.");
                     return;
                 default:
               
-                    System.out.println(dp.print1(" choice. Please try again.\n", 1));
+                    System.out.println("Invalid choice. Please try again.\n");
             }
         }
     }
